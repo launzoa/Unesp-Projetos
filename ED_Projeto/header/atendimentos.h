@@ -8,6 +8,7 @@ struct estr_ocorrencia
     int id;
     string tipo_servico;
     string descricao;
+    string cpf;
     string bairro;
     int tempo_chegada;
     struct estr_ocorrencia *prox;
@@ -21,11 +22,18 @@ struct estr_fila
 };
 typedef struct estr_fila FilaAtendimento;
 
-// Funções
+// Criação
 Ocorrencia *criar_ocorrencia(int tempo_atual);
+
+// Fila
 void enfileirar(FilaAtendimento * fila, Ocorrencia *nova);
 Ocorrencia *desenfileirar(FilaAtendimento *fila);
+
+// Listagem
 void listar_fila(FilaAtendimento *fila, string nome_fila);
-bool login(string *nome_login);
+void listar_historico(string cpf);
+
+// Funções
+bool login(string *nome_login, string *cpf_login);
 
 #endif

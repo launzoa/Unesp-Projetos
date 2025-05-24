@@ -1,3 +1,11 @@
+// ======================
+// ARQUIVO: interfaces.cpp
+// FUNCIONALIDADES:
+//      Responsável por controlar a interface textual do sistema. Contém os menus e a lógica de navegação entre as telas
+//      principais, incluindo: tela principal, telas de cadastro, listagem e emergência. Também contém os menus que
+//      direcionam para as respectivas funcionalidades em outros módulos.
+// ======================
+
 #include <bits\stdc++.h>
 #include "header/cadastros.h"
 #include "header/interfaces.h"
@@ -5,21 +13,28 @@
 
 using namespace std;
 
+// Inicialização e declaração de variáveis reusáveis.
 extern FilaAtendimento fila_ambulancia;
 extern FilaAtendimento fila_bombeiro;
 extern FilaAtendimento fila_policia;
 extern int tempo_simulado;
+string cpf_login;
+string nome_login;
 
 
-
+//  Limpa a tela
 void limpar_tela()
 {
     system("cls");
     return ;
 }
 
-// Telas
 
+
+// ----- TELAS ----- // ----- Interface da interface das telas
+
+
+//  Interface da tela principal
 void tela_principal()
 {   
     setlocale(LC_ALL, "");
@@ -35,6 +50,7 @@ void tela_principal()
         cout << "Opção: ";
         cin >> op;
         cin.ignore();
+
         menu_principal(op);
         limpar_tela();
 
@@ -44,6 +60,7 @@ void tela_principal()
 }
 
 
+//  Interface da tela de cadastro
 void tela_cadastro()
 {
     setlocale(LC_ALL, "");
@@ -52,24 +69,25 @@ void tela_cadastro()
         limpar_tela();
 
         cout << "/* Cadastrar *\\ \n";
-        cout << "(1) - Cadastrar Bairros\n";
-        cout << "(2) - Cadastrar Cidadãos\n";
-        cout << "(3) - Cadastrar Unidades de serviços\n";
-        cout << "(4) - Voltar\n";
+        cout << "(1) - Cadastrar Cidadãos\n";
+        cout << "(2) - Cadastrar Unidades de serviços\n";
+        cout << "(3) - Voltar\n";
         cout << "\n";
         cout << "Opção: ";
     
         cin >> op;
         cin.ignore();
+
         menu_cadastro(op);
         limpar_tela();
 
-    } while (op != 4);
+    } while (op != 3);
 
     return ;
 }
 
 
+//  Interface da tela de listagem
 void tela_listar()
 {
     setlocale(LC_ALL, "");
@@ -81,7 +99,7 @@ void tela_listar()
         cout << "/* Listar *\\ \n";
         cout << "(1) - Listar Bairros\n";
         cout << "(2) - Listar Cidadãos\n";
-        cout << "(3) - Listar Unidades de serviços\n";
+        cout << "(3) - Listar Unidades de serviço por bairros\n";
         cout << "(4) - Voltar\n";
         cout << "\n";
         cout << "Opção: ";
@@ -98,13 +116,13 @@ void tela_listar()
 }
 
 
+//  Interface da tela de atendimentos. Acesso somente a cidadão cadastrado, via CPF.
 void tela_atendimentos()
 {
     setlocale(LC_ALL, "");
 
     limpar_tela();
-    string nome_login;
-    if(!login(&nome_login)) return ;
+    if(!login(&nome_login, &cpf_login)) return ; // Verifica o login
 
     int op;
 
@@ -116,8 +134,9 @@ void tela_atendimentos()
         cout << "Tempo atual simulado: " << tempo_simulado << "\n\n";
         cout << "(1) - Registrar nova ocorrência\n";
         cout << "(2) - Visualizar fila de atendimentos\n";
-        cout << "(3) - Simular próxima unidade de tempo (1 atendimento)\n";
-        cout << "(4) - Voltar\n";
+        cout << "(3) - Visualizar histórico do cidadão\n";
+        cout << "(4) - Simular próxima unidade de tempo (1 atendimento)\n";
+        cout << "(5) - Voltar\n";
         cout << "Entre com a opção: ";
         cin >> op;
         cin.ignore();
@@ -126,7 +145,7 @@ void tela_atendimentos()
         
         menu_atendimentos(op);
 
-    } while (op != 4);
+    } while (op != 5);
     
 
     return ;
@@ -134,8 +153,10 @@ void tela_atendimentos()
 
 
 
-// Menus
+// ----- MENUS ----- // ----- Interface dos menus nas respectivas telas
 
+
+//  Menu da tela principal
 void menu_principal(int op)
 {
     switch(op)
@@ -163,22 +184,18 @@ void menu_principal(int op)
 }
 
 
+//  Menu da tela de cadastro
 void menu_cadastro(int op)
 {
     limpar_tela();
     switch(op)
     {
         case 1:
-            cadastrar_bairros();
-
-        break;
-
-        case 2:
             cadastrar_cidadaos();
 
         break;
 
-        case 3:
+        case 2:
             cadastrar_unidades();
 
         break;
@@ -190,6 +207,7 @@ void menu_cadastro(int op)
 }
 
 
+//  Menu da tela de listagem
 void menu_listar(int op)
 {
     limpar_tela();
@@ -208,8 +226,16 @@ void menu_listar(int op)
         break;
         
         case 3:
-        
+        {
+            string nome_bairro;
+            cout << "Entre com o nome do bairro: ";
+            getline(cin, nome_bairro);
+
+            limpar_tela();  
+            listar_unidades_por_bairros(nome_bairro);
+            system("pause");
         break;
+        }
 
         default:
         break;
@@ -218,6 +244,9 @@ void menu_listar(int op)
 }
 
 
+// Menu da tela de atendimentos
+// obs: observando essa função dá para refatorar os cases em outras funções. Não sei se é a melhor opção para 
+// legibilidade, as vezes menos é mais...
 void menu_atendimentos(int op)
 {
     switch(op)
@@ -254,10 +283,16 @@ void menu_atendimentos(int op)
             system("pause");
             break;
         }
+
         case 3:
+            listar_historico(cpf_login);
+            system("pause");
+        break;
+
+        case 4:
         {
             tempo_simulado++;
-
+            cout << "/* Fila de ocorrências *\\ \n\n";
             if(fila_bombeiro.inicio)
             {
                 Ocorrencia *atendida = desenfileirar(&fila_bombeiro);
@@ -285,6 +320,8 @@ void menu_atendimentos(int op)
         default:
         break;
     }
+
+    return ;
 }
 
 
