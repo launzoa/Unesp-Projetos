@@ -69,7 +69,11 @@ Através de uma simulação de atendimentos de emergência em uma cidade, este s
 ## 👤 Desenvolvedores
 
 **Luã do Carmo**
+
 **João Pedro Pina**
+
+**João Pedro Pedroso Bife**
+
 
 Curso de Bacharelado em Ciência da Computação
 Disciplina: Estrutura de Dados I - 2025
