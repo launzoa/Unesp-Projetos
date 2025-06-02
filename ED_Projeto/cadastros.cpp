@@ -1,9 +1,9 @@
 // ======================
 // ARQUIVO: cadastro.cpp
 // FUNCIONALIDADES:
-//      Lida com as principais funcionalidades dos cidadãos, bairros e unidades de serviço. Encontramos nesse
-//      arquivo algumas funcionalidades que estão relacionadas a esses 'objetos'. Dentre elas, principalmente
-//      temos funções, como: cadastro e criação, listagem, busca e funcionalidades consequentes.   
+//      Lida com as principais funcionalidades dos cidadaos, bairros e unidades de servico. Encontramos nesse
+//      arquivo algumas funcionalidades que estao relacionadas a esses 'objetos'. Dentre elas, principalmente
+//      temos funcoes, como: cadastro e criacao, listagem, busca e funcionalidades consequentes.   
 // ======================
 
 // Bibliotecas usadas
@@ -24,7 +24,7 @@ UnidadeServico *tabela_unidades[N];
 
 
 
-// Função para inicializar as tabelas hash com NULL
+// Funcao para inicializar as tabelas hash com NULL
 void inicializar_tabelas()
 {
     for (int i = 0; i < N; i++) 
@@ -37,13 +37,13 @@ void inicializar_tabelas()
 
 
 
-// ----- CADASTRO ----- // ----- Funções de cadastro de 'objetos'
+// ----- CADASTRO ----- // ----- Funcoes de cadastro de 'objetos'
 
 
 /*
-    A função cadastra o bairro na sua respectiva tabela-hash. 
-    Faz lista cruzada entre o bairro e unidades de serviços contidas no bairro.
-    Funções associadas: buscar_bairro(), criar_bairro().
+    A funcao cadastra o bairro na sua respectiva tabela-hash. 
+    Faz lista cruzada entre o bairro e unidades de servicos contidas no bairro.
+    Funcoes associadas: buscar_bairro(), criar_bairro().
 */
 void cadastrar_bairros(UnidadeServico *novo)
 {
@@ -72,8 +72,8 @@ void cadastrar_bairros(UnidadeServico *novo)
 
 
 /*
-    Cadastra um novo cidadão na sua respectiva tabela-hash.
-    Trata possíveis colisões na tabela-hash por lista encadeada.  
+    Cadastra um novo cidadao na sua respectiva tabela-hash.
+    Trata possiveis colisoes na tabela-hash por lista encadeada.  
 */
 void cadastrar_cidadaos()
 {
@@ -101,8 +101,8 @@ void cadastrar_cidadaos()
 
 
 /*
-    Cadastra uma nova unidade de serviço a sua respectiva tabela-hash.
-    Funções associadas: criar_unidade(), cadastrar_bairros("cadastro.cpp", 48).
+    Cadastra uma nova unidade de servico a sua respectiva tabela-hash.
+    Funcoes associadas: criar_unidade(), cadastrar_bairros("cadastro.cpp", 48).
 */
 void cadastrar_unidades()
 {
@@ -124,10 +124,10 @@ void cadastrar_unidades()
 
 
 
-// ----- LISTAGEM ----- // ----- Funções de impressão 
+// ----- LISTAGEM ----- // ----- Funcoes de impressao 
 
 
-//  Faz a listagem e impressão do conteúdo da tabela-hash dos bairros.
+//  Faz a listagem e impressao do conteudo da tabela-hash dos bairros.
 void listar_bairros()
 {
     cout << "/* Tabela Hash de Bairros */\n\n";
@@ -160,10 +160,10 @@ void listar_bairros()
 
 
 
-//  Faz a listagem e impressão do conteúdo da tabela-hash dos cidadãos.
+//  Faz a listagem e impressao do conteudo da tabela-hash dos cidadaos.
 void listar_cidadaos()
 {
-    cout << "/* Tabela Hash de Cidadãos */\n\n";
+    cout << "/* Tabela Hash de Cidadaos */\n\n";
     for (int i = 0; i < N; i++) 
     {
         if (tabela_cidadaos[i] != NULL) 
@@ -175,7 +175,7 @@ void listar_cidadaos()
                 cout << "  CPF: " << atual->cpf << "\n";
                 cout << "  Nome: " << atual->nome << "\n";
                 cout << "  Email: " << atual->email << "\n";
-                cout << "  Endereço: " << atual->endereco << "\n";
+                cout << "  Endereco: " << atual->endereco << "\n";
                 cout << "  Bairro: " << atual->bairro << "\n";
                 cout << "  --------------------------\n";
                 atual = atual->prox;
@@ -189,18 +189,18 @@ void listar_cidadaos()
 
 
 
-//  Faz a listagem das unidades de serviço associadas a um determinado bairro.
+//  Faz a listagem das unidades de servico associadas a um determinado bairro.
 void listar_unidades_por_bairros(string nome)
 {
     Bairro *bairro = buscar_bairro(nome);
 
     if(bairro == NULL) 
     {
-        cout << "Bairro não encontrado!\n";
+        cout << "Bairro nao encontrado!\n";
         return ;
     }
 
-    cout << "Unidades de serviço no bairro " << nome << ":\n\n";
+    cout << "Unidades de servico no bairro " << nome << ":\n\n";
     UnidadeServico *atual = bairro->lista_unidades;
 
     if(atual == NULL) 
@@ -220,7 +220,7 @@ void listar_unidades_por_bairros(string nome)
 
 
 
-// ----- CRIAÇÃO ----- // ----- Cria os 'objetos' (entrada de dados).
+// ----- CRIACAO ----- // ----- Cria os 'objetos' (entrada de dados).
 
 
 //  Cria o 'objeto' bairro
@@ -236,14 +236,14 @@ Bairro *criar_bairro(string nome)
 }
 
 
-//  Cria o 'objeto' cidadão
+//  Cria o 'objeto' cidadao
 Cidadao *criar_cidadao()
 {
     setlocale(LC_ALL, " ");
 
     Cidadao *novo = new Cidadao;
 
-    cout << "/* Cadastrar Cidadão: *\\\n\n";
+    cout << "/* Cadastrar Cidadao: *\\\n\n";
     
     cout << "CPF: ";
     getline(cin, novo->cpf);
@@ -254,7 +254,7 @@ Cidadao *criar_cidadao()
     cout << "\nEmail: ";
     getline(cin, novo->email);
     
-    cout << "\nEndereço: ";
+    cout << "\nEndereco: ";
     getline(cin, novo->endereco);
     
     cout << "\nBairro: ";
@@ -273,9 +273,9 @@ UnidadeServico *criar_unidade()
     setlocale(LC_ALL, "");
     UnidadeServico *novo = new UnidadeServico();
 
-    cout << "/* Cadastrar Unidade de Serviço: *\\\n\n";
+    cout << "/* Cadastrar Unidade de Servico: *\\\n\n";
     novo->id = id_unidade++;
-    cout << "Tipo de serviço: ";
+    cout << "Tipo de servico: ";
     getline(cin, novo->tipo);
     cout << "\nNome: ";
     getline(cin, novo->nome);
@@ -289,7 +289,7 @@ UnidadeServico *criar_unidade()
 
 // ----- BUSCA ----- // ----- Faz a busca dos seus respectivos 'objetos'.
 
-//  Busca e retorna um determinado bairro baseado em seu nome. Retorna NULL caso não encontre o bairro.
+//  Busca e retorna um determinado bairro baseado em seu nome. Retorna NULL caso nao encontre o bairro.
 Bairro *buscar_bairro(string nome)
 {
     int idx = hash_map(nome);
@@ -305,7 +305,7 @@ Bairro *buscar_bairro(string nome)
 }
 
 
-//  Busca e retorna um determinado cidadão baseado em seu cpf. Retorna NULL caso não encontre o cidadão.
+//  Busca e retorna um determinado cidadao baseado em seu cpf. Retorna NULL caso nao encontre o cidadao.
 Cidadao *buscar_cidadao(string cpf)
 {
     int idx = hash_map(cpf);
@@ -322,13 +322,13 @@ Cidadao *buscar_cidadao(string cpf)
 
 
 
-// ----- FUNCIONALIDADES ----- // ----- Funções e estruturas de dados.
+// ----- FUNCIONALIDADES ----- // ----- Funcoes e estruturas de dados.
 
 /*
-    Função que retorna um determinado índice que vai ser usado para acessar a respectiva tabela-hash.
-    Para a implementação dessa estrutura de dados, é feito uma soma total baseado no valor da tabela ASCII resultante
-    de uma determinada string. Por fim, esse valor sofre uma circulação circular do número primo 127 e por fim é 
-    retornado o índice 'exclusivo' da tabela-hash.   
+    Funcao que retorna um determinado indice que vai ser usado para acessar a respectiva tabela-hash.
+    Para a implementacao dessa estrutura de dados, e feito uma soma total baseado no valor da tabela ASCII resultante
+    de uma determinada string. Por fim, esse valor sofre uma circulacao circular do numero primo 127 e por fim e 
+    retornado o indice 'exclusivo' da tabela-hash.   
 */
 int hash_map(string valor)
 {

@@ -1,12 +1,12 @@
 // ======================
 // ARQUIVO: atendimentos.cpp
 // FUNCIONALIDADES:
-//      Responsável por gerenciar a simulação de ocorrências, enfileiramento, atendimento e histórico. Este módulo
-//      conecta o cidadão logado com as ocorrências registradas, organiza por tipo de serviço e simula o avanço
+//      Responsavel por gerenciar a simulacao de ocorrencias, enfileiramento, atendimento e historico. Este modulo
+//      conecta o cidadao logado com as ocorrencias registradas, organiza por tipo de servico e simula o avanco
 //      temporal do sistema.
 // ======================
 
-// OBS: Ainda em processo de documentação... 
+// OBS: Ainda em processo de documentacao... 
 
 #include <bits\stdc++.h>
 #include <unistd.h>
@@ -33,19 +33,19 @@ extern string nome_login;
 
 
 
-// ----- CRIAÇÃO DE OCORRÊNCIA ----- //
+// ----- CRIACAO DE OCORRENCIA ----- //
 
 
 Ocorrencia *criar_ocorrencia(int tempo_atual)
 {
     setlocale(LC_ALL, "");
-    cout << "/*Cadastro de ocorrência *\\ \n\n";
+    cout << "/*Cadastro de ocorrencia *\\ \n\n";
     Ocorrencia *nova = new Ocorrencia();
     nova->id = id_ocorrencia++;
 
-    cout << "Tipo de serviço: ";
+    cout << "Tipo de servico: ";
     getline(cin, nova->tipo_servico);
-    cout << "\nDescrição: ";
+    cout << "\nDescricao: ";
     getline(cin, nova->descricao);
     cout << "\nBairro: ";
     getline(cin, nova->bairro);
@@ -68,7 +68,7 @@ Ocorrencia *criar_ocorrencia(int tempo_atual)
 
 
 
-// ----- FILA ----- // ----- Funções respectivas a fila de ocorrências.
+// ----- FILA ----- // ----- Funcoes respectivas a fila de ocorrencias.
 
 
 
@@ -104,7 +104,7 @@ Ocorrencia *desenfileirar(FilaAtendimento *fila)
 
 
 
-// ----- LISTAGEM ----- // ----- Funções de listagem e impressão
+// ----- LISTAGEM ----- // ----- Funcoes de listagem e impressao
 
 
 void listar_fila(FilaAtendimento *fila, string nome_fila)
@@ -124,7 +124,7 @@ void listar_fila(FilaAtendimento *fila, string nome_fila)
     {
         cout << "ID: " << atual->id << "\n";
         cout << "Tipo: " << atual->tipo_servico << "\n";
-        cout << "Descrição: " << atual->descricao << "\n";
+        cout << "Descricao: " << atual->descricao << "\n";
         cout << "Bairro: " << atual->bairro << "\n";
         cout << "Chegada (tempo simulado): " << atual->tempo_chegada << "\n";
         cout << "--------------------------\n\n";
@@ -143,18 +143,18 @@ void listar_historico(string cpf)
 
     if(atual == NULL) 
     {
-        cout << "Cidadão não encontrado.\n";
+        cout << "Cidadao nao encontrado.\n";
         return ;
     }
 
     if(atual->historico == NULL) 
     {
-        cout << "Cidadão sem nenhuma ocorrência no histórico.\n";
+        cout << "Cidadao sem nenhuma ocorrencia no historico.\n";
         return ;
     }
 
     Ocorrencia* temp = atual->historico;
-    cout << "Histórico de ocorrências de " << atual->nome << ":\n";
+    cout << "Historico de ocorrencias de " << atual->nome << ":\n";
     
     
     while (temp != NULL) 
@@ -171,7 +171,7 @@ void listar_historico(string cpf)
 
 
 
-// ----- LOGIN DO USUÁRIO ----- //
+// ----- LOGIN DO USUARIO ----- //
 
 
  
@@ -180,7 +180,7 @@ bool login(string *nome_login, string *cpf_login)
     setlocale(LC_ALL, "");
     string nome, cpf;
     
-    cout << "Para acessar a tela de atendimentos, solicitamos que o usuário se identifique.\n\n";
+    cout << "Para acessar a tela de atendimentos, solicitamos que o usuario se identifique.\n\n";
     cout << "CPF do solicitante: ";
     getline(cin, cpf);
     cout << "\nNome: ";
@@ -190,7 +190,7 @@ bool login(string *nome_login, string *cpf_login)
     Cidadao *atual = tabela_cidadaos[idx];
     if(atual == NULL) 
     {
-        cout << "\nNão foi encontrado em nossos registros esse cadastro.\n";
+        cout << "\nNao foi encontrado em nossos registros esse cadastro.\n";
         system("pause");
         return false;
     }
@@ -199,7 +199,7 @@ bool login(string *nome_login, string *cpf_login)
     {
         if(atual->prox == NULL)
         {
-            cout << "\nNão foi encontrado em nossos registros esse cadastro.\n";
+            cout << "\nNao foi encontrado em nossos registros esse cadastro.\n";
             system("pause");
             return false;
         }
