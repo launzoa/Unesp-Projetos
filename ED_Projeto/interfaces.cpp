@@ -1,9 +1,9 @@
 // ======================
 // ARQUIVO: interfaces.cpp
 // FUNCIONALIDADES:
-//      Responsável por controlar a interface textual do sistema. Contém os menus e a lógica de navegação entre as telas
-//      principais, incluindo: tela principal, telas de cadastro, listagem e emergência. Também contém os menus que
-//      direcionam para as respectivas funcionalidades em outros módulos.
+//      Responsavel por controlar a interface textual do sistema. Contem os menus e a logica de navegacao entre as telas
+//      principais, incluindo: tela principal, telas de cadastro, listagem e emergencia. Tambem contem os menus que
+//      direcionam para as respectivas funcionalidades em outros modulos.
 // ======================
 
 #include <bits\stdc++.h>
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-// Inicialização e declaração de variáveis reusáveis.
+// Inicializacao e declaracao de variaveis reusaveis.
 extern FilaAtendimento fila_ambulancia;
 extern FilaAtendimento fila_bombeiro;
 extern FilaAtendimento fila_policia;
@@ -41,13 +41,13 @@ void tela_principal()
     int op;
     
     do{
-        cout << "/* Simulador de Atendimentos de Emergências *\\ \n";
+        cout << "/* Simulador de Atendimentos de Emergencias *\\ \n";
         cout << "(1) - Cadastrar\n";
         cout << "(2) - Listar\n";
         cout << "(3) - Atendimento\n";
         cout << "(4) - Sair\n";
         cout << "\n";
-        cout << "Opção: ";
+        cout << "Opcao: ";
         cin >> op;
         cin.ignore();
 
@@ -69,11 +69,11 @@ void tela_cadastro()
         limpar_tela();
 
         cout << "/* Cadastrar *\\ \n";
-        cout << "(1) - Cadastrar Cidadãos\n";
-        cout << "(2) - Cadastrar Unidades de serviços\n";
+        cout << "(1) - Cadastrar Cidadaos\n";
+        cout << "(2) - Cadastrar Unidades de servicos\n";
         cout << "(3) - Voltar\n";
         cout << "\n";
-        cout << "Opção: ";
+        cout << "Opcao: ";
     
         cin >> op;
         cin.ignore();
@@ -98,11 +98,11 @@ void tela_listar()
 
         cout << "/* Listar *\\ \n";
         cout << "(1) - Listar Bairros\n";
-        cout << "(2) - Listar Cidadãos\n";
-        cout << "(3) - Listar Unidades de serviço por bairros\n";
+        cout << "(2) - Listar Cidadaos\n";
+        cout << "(3) - Listar Unidades de servico por bairros\n";
         cout << "(4) - Voltar\n";
         cout << "\n";
-        cout << "Opção: ";
+        cout << "Opcao: ";
     
         cin >> op;
         cin.ignore();
@@ -116,7 +116,7 @@ void tela_listar()
 }
 
 
-//  Interface da tela de atendimentos. Acesso somente a cidadão cadastrado, via CPF.
+//  Interface da tela de atendimentos. Acesso somente a cidadao cadastrado, via CPF.
 void tela_atendimentos()
 {
     setlocale(LC_ALL, "");
@@ -132,12 +132,12 @@ void tela_atendimentos()
         cout << "/* Painel de Atendimentos */\n";
         cout << "Bem vindo, " << nome_login << "\n\n";
         cout << "Tempo atual simulado: " << tempo_simulado << "\n\n";
-        cout << "(1) - Registrar nova ocorrência\n";
+        cout << "(1) - Registrar nova ocorrencia\n";
         cout << "(2) - Visualizar fila de atendimentos\n";
-        cout << "(3) - Visualizar histórico do cidadão\n";
-        cout << "(4) - Simular próxima unidade de tempo (1 atendimento)\n";
+        cout << "(3) - Visualizar historico do cidadao\n";
+        cout << "(4) - Simular proxima unidade de tempo (1 atendimento)\n";
         cout << "(5) - Voltar\n";
-        cout << "Entre com a opção: ";
+        cout << "Entre com a opcao: ";
         cin >> op;
         cin.ignore();
 
@@ -245,8 +245,8 @@ void menu_listar(int op)
 
 
 // Menu da tela de atendimentos
-// obs: observando essa função dá para refatorar os cases em outras funções. Não sei se é a melhor opção para 
-// legibilidade, as vezes menos é mais...
+// obs: observando essa funcao, da para refatorar os cases em outras funcoes. Nao sei se e a melhor opcao para 
+// legibilidade, as vezes menos e mais...
 void menu_atendimentos(int op)
 {
     switch(op)
@@ -268,7 +268,7 @@ void menu_atendimentos(int op)
             }
             else
             {
-                cout << "Tipo de serviço inválido! Ocorrência não pode ser completada!\n";
+                cout << "Tipo de servico invalido! Ocorrencia nao pode ser completada!\n";
                 delete nova;
             }
             system("pause");
@@ -278,8 +278,8 @@ void menu_atendimentos(int op)
         case 2:
         {
             listar_fila(&fila_bombeiro, "Bombeiros");
-            listar_fila(&fila_ambulancia, "Ambulância");
-            listar_fila(&fila_policia, "Polícia");
+            listar_fila(&fila_ambulancia, "Ambulancia");
+            listar_fila(&fila_policia, "Polacia");
             system("pause");
             break;
         }
@@ -292,25 +292,25 @@ void menu_atendimentos(int op)
         case 4:
         {
             tempo_simulado++;
-            cout << "/* Fila de ocorrências *\\ \n\n";
+            cout << "/* Fila de ocorrencias *\\ \n\n";
             if(fila_bombeiro.inicio)
             {
                 Ocorrencia *atendida = desenfileirar(&fila_bombeiro);
-                cout << "[Bombeiro] Atendendo ocorrência: " << atendida->descricao << "\n";
+                cout << "[Bombeiro] Atendendo ocorrencia: " << atendida->descricao << "\n";
                 delete(atendida);
             }
 
             if(fila_ambulancia.inicio)
             {
                 Ocorrencia *atendida = desenfileirar(&fila_ambulancia);
-                cout << "[Ambulância] Atendendo ocorrência: " << atendida->descricao << "\n";
+                cout << "[Ambulancia] Atendendo ocorrencia: " << atendida->descricao << "\n";
                 delete(atendida);
             }
 
             if(fila_policia.inicio)
             {
                 Ocorrencia *atendida = desenfileirar(&fila_policia);
-                cout << "[Polícia] Atendendo ocorrência: " << atendida->descricao << "\n";
+                cout << "[Policia] Atendendo ocorrencia: " << atendida->descricao << "\n";
                 delete(atendida);
             }
             system("pause");
